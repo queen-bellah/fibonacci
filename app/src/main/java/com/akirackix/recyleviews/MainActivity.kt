@@ -1,10 +1,7 @@
 package com.akirackix.recyleviews
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.akirackix.recyleviews.databinding.ActivityMainBinding
 
@@ -15,13 +12,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-        var nbrs = fibonacci(100)
-      binding.rvNames.layoutManager = LinearLayoutManager
-var numbers=NamesRecyclerViewAdapter(number)
-        binding.rvNames.adapter=numbers
-    }
-    fun fibonacci(n:Int):List<Int>{
-        val numbers =
-    }
+        val numbers = fibonacci(100)
+        binding.rvNames.layoutManager = LinearLayoutManager(this)
+        var numberAdapter = NamesRecyclerViewAdapter(numbers)
+        binding.rvNames.adapter = numberAdapter
+            }
+   fun fibonacci(n:Int):List<Int>{
+       var numbers = mutableListOf(0,1)
+       while (numbers.size < n){
+           numbers.add(numbers[numbers.lastIndex] + numbers[numbers.lastIndex -1])
+       }
+       return numbers
+   }
 
 }
